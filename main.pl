@@ -48,6 +48,7 @@ is_pop_band_founded_before_year(Band, Year) :-
     FoundedYear < Year.
 % Consultas %
 % is_pop_band_founded_before_year(Band, 1990)
+% is_pop_band_founded_before_year("The Stems", 1990)
 
 
 % Regra 2
@@ -118,21 +119,23 @@ bands_older_than_its_records(Band) :-
 
 % Regra 7 %
 % Lista gravadoras assinadas com bandas de metal
-records_signed_with_metal_bands(Record) :-
+list_records_signed_with_metal_bands(Record) :-
     findall(Record, (bands(_, Genre, _, _, Record, _), sub_string(Genre, _, _, _, 'metal')), AllRecords),
     list_to_set(AllRecords, Record) .
 % Consultas %
 % records_signed_with_metal_bands(Record)
-% Se colocarmos o nome de alguma gravadora, ela sempre vai retornar falso
+% Se colocarmos o nome de alguma gravadora, ela sempre vai retornar falso, pois esta
+% regra serve apenas para listar
 
 
 % Regra 8 %
 % Lista todos os subgeneros do rock e do metal (ordenados)
-all_metal_and_rock_subgeneres_sorted(Genres) :-
+list_all_metal_and_rock_subgeneres_sorted(Genres) :-
     findall(Genre, (bands(_, Genre, _, _, _, _), (sub_string(Genre, _, _, _, 'rock') ;
     sub_string(Genre, _, _, _, 'metal'))), UnsortedGenres),
     sort(UnsortedGenres, Genres) .     
 
 % Consultas %
 % all_metal_and_rock_subgeneres_sorted(Genres)
-% Se colocarmos o nome de algum genero, ela sempre vai retornar falso
+% Se colocarmos o nome de algum genero, ela sempre vai retornar falso, pois esta
+% regra serve apenas para listar
